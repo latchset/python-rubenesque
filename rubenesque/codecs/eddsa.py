@@ -66,5 +66,5 @@ def decode(cls, bytes):
     primary &= ~mask
 
     point = cls.recover(primary, bit)
-    point.is_valid
+    assert point.is_valid
     return point
