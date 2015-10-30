@@ -39,9 +39,8 @@ setup(
     url="http://github.com/npmccallum/python-rubenesque",
     packages=[
         'rubenesque',
-        'rubenesque.fp',
-        'rubenesque.fp.edwards',
-        'rubenesque.fp.weierstrass',
+        'rubenesque.codecs',
+        'rubenesque.curves',
     ],
     long_description=read('README'),
     requires=[],
