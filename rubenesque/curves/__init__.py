@@ -35,6 +35,7 @@ def by_name(name, cls=None):
 
     >>> by_name('secp192r1')
     <class 'rubenesque.curves.sec.secp192r1'>
+    >>> by_name('snoopyCurve')
     """
 
     if cls is None:
@@ -56,6 +57,7 @@ def by_oid(oid, cls=None):
 
     >>> by_oid((1, 2, 840, 10045, 3, 1, 1))
     <class 'rubenesque.curves.sec.secp192r1'>
+    >>> by_oid((1, 2, 3, 4, 5))
     """
 
     if cls is None:
