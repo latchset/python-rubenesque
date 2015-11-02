@@ -83,7 +83,9 @@ After exchanging their encoded keys, Alice computes the session key:
 Bob does the same:
 >>> bob_ses = decode(secp256r1, alice_enc) * bob_prv
 
-Notice that Bob and Alice share the same session key:
+Notice that Bob and Alice share the same session key, but not private key:
+>>> alice_prv == bob_prv
+False
 >>> alice_ses == bob_ses
 True
 """
