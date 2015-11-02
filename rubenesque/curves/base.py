@@ -53,7 +53,7 @@ class Point(metaclass=abc.ABCMeta):
 
     @classmethod
     def private_key(cls, min=1):
-        "Generates an integer suitable for use as a private key"
+        "Generates a random integer suitable for use as a private key"
         bytes = (cls.order.bit_length() + 7) // 8
         mask = 2 ** cls.order.bit_length() - 1
 
