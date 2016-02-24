@@ -54,6 +54,7 @@ Rubenesque currently implements the following curves:
  * brainpoolP512r1
  * edwards25519
  * edwards448
+ * MDC201601
  * secp192r1
  * secp224r1
  * secp256r1
