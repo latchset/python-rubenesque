@@ -41,6 +41,7 @@ setup(
         'rubenesque',
         'rubenesque.codecs',
         'rubenesque.curves',
+        'rubenesque.signatures',
     ],
     long_description=read('README'),
     requires=[],
