@@ -31,7 +31,11 @@ import os
 from ..math import inv
 
 
-class Point(metaclass=abc.ABCMeta):
+if not hasattr(abc, "ABC"):
+    abc.ABC = abc.ABCMeta(str('ABC'), (), {})
+
+
+class Point(abc.ABC):
     generator = None
     cofactor = 1
     order = 0
