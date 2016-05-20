@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # pylint: disable=line-too-long
 #
 # Copyright (c) 2015, Red Hat, Inc.
