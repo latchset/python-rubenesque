@@ -131,8 +131,10 @@ class Point(abc.ABC):
 
         return q
 
-    def __truediv__(self, divisor):
+    def __div__(self, divisor):
         return self * inv(divisor, self.order)
+    __floordiv__ = __div__
+    __truediv__ = __div__
 
     def __sub__(self, other):
         return self + -other
