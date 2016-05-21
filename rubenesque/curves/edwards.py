@@ -105,8 +105,6 @@ class Point(Point):
     def __add__(self, other):
         assert isinstance(other, self.__class__)
 
-        self.__normalize()
-        other.__normalize()
         if self.is_identity or other.is_identity:
             return self if other.is_identity else other
 
