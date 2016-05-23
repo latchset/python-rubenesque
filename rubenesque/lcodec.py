@@ -24,72 +24,36 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from __future__ import absolute_import
-import sys
-
-if sys.version_info >= (3,):
-    def lenc(v, l, be=True):
-        """Encode a long integer to a bytearray.
-
-        >>> lenc(0xff, 1, True)
-        b'\\xff'
-        >>> lenc(0xff, 1, False)
-        b'\\xff'
-        >>> lenc(0xff, 2, True)
-        b'\\x00\\xff'
-        >>> lenc(0xff, 2, False)
-        b'\\xff\\x00'
-        """
-        return v.to_bytes(l, 'big' if be else 'little')
+from binascii import hexlify, unhexlify
 
 
-    def ldec(v, be=True):
-        """Decode a long integer from bytes.
-
-        >>> ldec(b'\\xff', True)
-        255
-        >>> ldec(b'\\xff', False)
-        255
-        >>> ldec(b'\\x00\\xff', True)
-        255
-        >>> ldec(b'\\x00\\xff', False)
-        65280
-        """
-        return int.from_bytes(v, 'big' if be else 'little')
-else:
-    import codecs
+if not hasattr(__builtins__, "long"):
+    long = int
 
 
-    def lenc(v, l, be=True):
-        """Encode a long integer to a bytearray.
+def lenc(v, l, be=True):
+    r"""Encode a long integer to bytes.
 
-        >>> lenc(0xff, 1, True)
-        '\\xff'
-        >>> lenc(0xff, 1, False)
-        '\\xff'
-        >>> lenc(0xff, 2, True)
-        '\\x00\\xff'
-        >>> lenc(0xff, 2, False)
-        '\\xff\\x00'
-        """
-        v = "%X" % v
-        if len(v) > l * 2:
-            raise OverflowError()
-        v = "0" * (l * 2 - len(v)) + v
-        return codecs.decode(v if be else bytearray(reversed(v)), 'hex')
+    >>> lenc(0xff, 1, True)
+    b'\xff'
+    >>> lenc(0xff, 1, False)
+    b'\xff'
+    >>> lenc(0xff, 2, True)
+    b'\x00\xff'
+    >>> lenc(0xff, 2, False)
+    b'\xff\x00'
+    """
+    fmt = "%%0%dX" % (l * 2)
+    v = unhexlify(fmt % v)
+    return v if be else v[::-1]
 
 
-    def ldec(v, be=True):
-        """Decode a long integer from bytes.
+def ldec(v, be=True):
+    """Decode a long integer from bytes.
 
-        >>> ldec('\\xff', True)
-        255L
-        >>> ldec('\\xff', False)
-        255L
-        >>> ldec('\\x00\\xff', True)
-        255L
-        >>> ldec('\\x00\\xff', False)
-        65280L
-        """
-        v = codecs.encode(v if be else bytearray(reversed(v)), 'hex')
-        return long(v, 16)
+    >>> assert ldec(b'\\xff', True) == 255
+    >>> assert ldec(b'\\xff', False) == 255
+    >>> assert ldec(b'\\x00\\xff', True) == 255
+    >>> assert ldec(b'\\x00\\xff', False) == 65280
+    """
+    return long(hexlify(v if be else v[::-1]), 16)
