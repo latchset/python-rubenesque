@@ -118,7 +118,8 @@ def decode(cls, bytes):
         s = ldec(bytes[l + 1:2 * l + 1])
         point = cls.create(p, s)
     else:
-        point = cls.recover(p, bytes[0] & 1)
+        s = bytes[0] if isinstance(bytes[0], int) else ord(bytes[0])
+        point = cls.recover(p, s & 1)
 
     assert point.is_valid
     return point
