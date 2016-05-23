@@ -29,6 +29,8 @@ Implements codec according to the protocol discussed on CFRG:
 http://www.ietf.org/mail-archive/web/cfrg/current/msg07256.html
 """
 
+from ..lcodec import lenc, ldec
+
 
 def encode(point):
     """
@@ -50,7 +52,7 @@ def encode(point):
 
     l = point.bits() // 8 + 1
     b = (point.secondary & 1) << (l * 8 - 1)
-    return (point.primary | b).to_bytes(l, 'little')
+    return lenc(point.primary | b, l, False)
 
 
 def decode(cls, bytes):
@@ -78,7 +80,7 @@ def decode(cls, bytes):
     l = cls.bits() // 8 + 1
     assert len(bytes) == l
 
-    p = int.from_bytes(bytes, 'little')
+    p = ldec(bytes, False)
     b = (p >> (l * 8 - 1)) & 1
     p &= ~(1 << (l * 8 - 1))
 

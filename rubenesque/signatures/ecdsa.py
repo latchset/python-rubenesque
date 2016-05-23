@@ -25,6 +25,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from ..math import inv
+from ..lcodec import ldec
 
 
 def sign(cls, prv, hsh, testk=None):
@@ -57,7 +58,7 @@ def sign(cls, prv, hsh, testk=None):
     """
     assert prv >= 1 and prv < cls.order
 
-    z = int.from_bytes(hsh, 'big') & (2 ** cls.bits() - 1)
+    z = ldec(hsh) & (2 ** cls.bits() - 1)
     while True:
         k = cls.private_key() if testk is None else testk
         r = (cls.generator() * k).primary % cls.order
@@ -128,7 +129,7 @@ def verify(pub, hsh, r, s):
     if s < 1 or s >= pub.order:
         return False
 
-    z = int.from_bytes(hsh, 'big') & (2 ** pub.bits() - 1)
+    z = ldec(hsh) & (2 ** pub.bits() - 1)
     w = inv(s, pub.order)
     u1 = z * w % pub.order
     u2 = r * w % pub.order

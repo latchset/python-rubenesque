@@ -29,6 +29,7 @@ import abc
 import os
 
 from ..math import inv
+from ..lcodec import ldec
 
 
 if not hasattr(abc, "ABC"):
@@ -69,7 +70,7 @@ class Point(abc.ABC):
 
         r = 0
         while r < min or r >= cls.order:
-            r = int.from_bytes(os.urandom(bytes), 'big') & mask
+            r = ldec(os.urandom(bytes)) & mask
 
         return r
 

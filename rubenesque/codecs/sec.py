@@ -24,6 +24,8 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+from ..lcodec import lenc, ldec
+
 
 def encode(point, compressed=True):
     """
@@ -64,12 +66,12 @@ def encode(point, compressed=True):
     assert not point.is_identity
 
     l = (point.bits() + 7) // 8
-    p = point.primary.to_bytes(l, 'big')
+    p = lenc(point.primary, l)
 
     if compressed:
-        return (point.secondary & 1 | 2).to_bytes(1, 'big') + p
+        return lenc(point.secondary & 1 | 2, 1) + p
     else:
-        return b'\x04' + p + point.secondary.to_bytes(l, 'big')
+        return b'\x04' + p + lenc(point.secondary, l)
 
 
 def decode(cls, bytes):
@@ -111,9 +113,9 @@ def decode(cls, bytes):
     assert bytes[0] in (2, 3, 4)
 
     l = (cls.bits() + 7) // 8
-    p = int.from_bytes(bytes[1:l + 1], 'big')
+    p = ldec(bytes[1:l + 1])
     if bytes[0] == 4:
-        s = int.from_bytes(bytes[l + 1:2 * l + 1], 'big')
+        s = ldec(bytes[l + 1:2 * l + 1])
         point = cls.create(p, s)
     else:
         point = cls.recover(p, bytes[0] & 1)
