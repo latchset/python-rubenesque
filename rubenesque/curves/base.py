@@ -47,6 +47,11 @@ class Point(metaclass=abc.ABCMeta):
         "The generator (a.k.a. base point)"
 
     @classmethod
+    def create(cls, primary, secondary):
+        "Creates a point using the primary and secondary coordinates"
+        return cls(primary, secondary)
+
+    @classmethod
     @abc.abstractmethod
     def recover(cls, primary, bit):
         "Recovers a point using the primary coordinate and a secondary bit"
@@ -64,7 +69,7 @@ class Point(metaclass=abc.ABCMeta):
         return r
 
     @abc.abstractmethod
-    def __init__(self, primary=None, secondary=None, *args, **kwargs):
+    def __init__(self, x=None, y=None, *args, **kwargs):
         "Creates a new point with the specified coordinates"
 
     @abc.abstractproperty
@@ -76,12 +81,22 @@ class Point(metaclass=abc.ABCMeta):
         "Whether or not this point represents the neutral element"
 
     @abc.abstractproperty
-    def primary(self):
-        "The primary coordinate"
+    def x(self):
+        "The x coordinate"
 
     @abc.abstractproperty
+    def y(self):
+        "The y coordinate"
+
+    @property
+    def primary(self):
+        "The primary coordinate"
+        return self.x
+
+    @property
     def secondary(self):
         "The secondary coordinate"
+        return self.y
 
     @abc.abstractmethod
     def __add__(self, other):
@@ -123,4 +138,4 @@ class Point(metaclass=abc.ABCMeta):
 
         l = (self.__class__.bits() + 7) // 8 * 2
         t = "%s(%%0%dX, %%0%dX)" % (self.__class__.__name__, l, l)
-        return t % (self.primary, self.secondary)
+        return t % (self.x, self.y)

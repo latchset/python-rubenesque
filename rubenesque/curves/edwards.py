@@ -35,6 +35,10 @@ class Point(Point):
     d = 1
 
     @classmethod
+    def create(cls, primary, secondary):
+        return cls(secondary, primary)
+
+    @classmethod
     def recover(cls, primary, bit):
         pp = primary * primary % cls.prime
         a = (pp - 1) % cls.prime
@@ -43,14 +47,14 @@ class Point(Point):
         assert s != 0
 
         secondary = s if s & 1 == bit else ((cls.prime - s) % cls.prime)
-        return cls(primary, secondary)
+        return cls(secondary, primary)
 
-    def __init__(self, primary=None, secondary=None, z=1, t=None):
-        assert (primary is None and secondary is None) \
-            or (primary is not None and secondary is not None)
+    def __init__(self, x=None, y=None, z=1, t=None):
+        assert (y is None and x is None) \
+            or (y is not None and x is not None)
 
-        self.__x = 0 if secondary is None else secondary
-        self.__y = 1 if primary is None else primary
+        self.__x = 0 if x is None else x
+        self.__y = 1 if y is None else y
         self.__z = z
         self.__t = t if t is not None else (
             self.__x * self.__y % self.__class__.prime
@@ -78,8 +82,8 @@ class Point(Point):
 
         p = self.__class__.prime
 
-        yy = self.primary * self.primary % p
-        xx = self.secondary * self.secondary % p
+        yy = self.y * self.y % p
+        xx = self.x * self.x % p
 
         l = (self.__class__.a * xx % p + yy) % p
         r = (1 + self.__class__.d * xx % p * yy % p) % p
@@ -87,14 +91,22 @@ class Point(Point):
         return l == r
 
     @property
-    def primary(self):
+    def x(self):
+        self.__normalize()
+        return self.__x if self.__z == 1 else None
+
+    @property
+    def y(self):
         self.__normalize()
         return self.__y if self.__z == 1 else None
 
     @property
+    def primary(self):
+        return self.y
+
+    @property
     def secondary(self):
-        self.__normalize()
-        return self.__x if self.__z == 1 else None
+        return self.x
 
     def __eq__(self, other):
         p = self.__class__.prime
@@ -135,4 +147,4 @@ class Point(Point):
         Y3 = G * H % p
         T3 = E * H % p
         Z3 = F * G % p
-        return self.__class__(Y3, X3, Z3, T3)
+        return self.__class__(X3, Y3, Z3, T3)

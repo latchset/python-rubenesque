@@ -54,13 +54,13 @@ class Point(Point):
         secondary = s if s & 1 == bit else ((cls.prime - s) % cls.prime)
         return cls(primary, secondary)
 
-    def __init__(self, primary=None, secondary=None, z=1):
-        assert (primary is None and secondary is None) \
-            or (primary is not None and secondary is not None)
+    def __init__(self, x=None, y=None, z=1):
+        assert (x is None and y is None) \
+            or (x is not None and y is not None)
 
-        self.__x = 0 if primary is None else primary
-        self.__y = 1 if secondary is None else secondary
-        self.__z = 0 if secondary is None else z
+        self.__x = 0 if x is None else x
+        self.__y = 1 if y is None else y
+        self.__z = 0 if y is None else z
 
     def __normalize(self):
         if self.__z in (0, 1):
@@ -80,17 +80,17 @@ class Point(Point):
         if self.is_identity:
             return False
 
-        l = self.__class__.__weierstrass(self.primary)
-        r = self.secondary * self.secondary % self.__class__.prime
+        l = self.__class__.__weierstrass(self.x)
+        r = self.y * self.y % self.__class__.prime
         return l == r
 
     @property
-    def primary(self):
+    def x(self):
         self.__normalize()
         return self.__x if self.__z == 1 else None
 
     @property
-    def secondary(self):
+    def y(self):
         self.__normalize()
         return self.__y if self.__z == 1 else None
 

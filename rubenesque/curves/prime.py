@@ -40,7 +40,7 @@ class Point(Point):
         if self.is_identity:
             return self
 
-        return self.__class__(
+        return self.__class__.create(
             self.primary,
             self.prime - self.secondary
         )
