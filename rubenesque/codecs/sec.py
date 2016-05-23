@@ -110,7 +110,7 @@ def decode(cls, bytes):
     >>> decode(edwards448, encode(edwards448.generator(), False))
     edwards448(79A70B2B70400553AE7C9DF416C792C61128751AC92969240C25A07D728BDC93E21F7787ED6972249DE732F38496CD11698713093E9C04FC, 7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE)
     """
-    assert bytes[0] in (2, 3, 4)
+    assert bytes.startswith((b'\x02', b'\x03', b'\x04'))
 
     l = (cls.bits() + 7) // 8
     p = ldec(bytes[1:l + 1])
