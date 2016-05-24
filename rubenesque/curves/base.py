@@ -39,8 +39,8 @@ if not hasattr(abc, "ABC"):
 class Point(abc.ABC):
     generator = None
     cofactor = 1
+    aliases = ()
     order = 0
-    oid = None
 
     @classmethod
     @abc.abstractmethod

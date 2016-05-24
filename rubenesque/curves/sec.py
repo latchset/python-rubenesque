@@ -29,7 +29,10 @@ from .weierstrass import Point
 
 class secp192r1(Point):
     """
-    >>> cls = secp192r1
+    >>> from . import find
+    >>> cls = find("secp192r1")
+    >>> find("1.2.840.10045.3.1.1")
+    <class 'rubenesque.curves.sec.secp192r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -70,7 +73,7 @@ class secp192r1(Point):
     b = 0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1
     order = 0xffffffffffffffffffffffff99def836146bc9b1b4d22831
     prime = 0xfffffffffffffffffffffffffffffffeffffffffffffffff
-    oid = (1, 2, 840, 10045, 3, 1, 1)
+    aliases = ("1.2.840.10045.3.1.1", )
 
     @classmethod
     def generator(cls):
@@ -82,7 +85,10 @@ class secp192r1(Point):
 
 class secp224r1(Point):
     """
-    >>> cls = secp224r1
+    >>> from . import find
+    >>> cls = find("secp224r1")
+    >>> find("1.3.132.0.33")
+    <class 'rubenesque.curves.sec.secp224r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -123,7 +129,7 @@ class secp224r1(Point):
     b = 0xb4050a850c04b3abf54132565044b0b7d7bfd8ba270b39432355ffb4
     order = 0xffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
     prime = 0xffffffffffffffffffffffffffffffff000000000000000000000001
-    oid = (1, 3, 132, 0, 33)
+    aliases = ("1.3.132.0.33", )
 
     @classmethod
     def generator(cls):
@@ -135,7 +141,14 @@ class secp224r1(Point):
 
 class secp256r1(Point):
     """
-    >>> cls = secp256r1
+    >>> from . import find
+    >>> cls = find("secp256r1")
+    >>> find("1.2.840.10045.3.1.7")
+    <class 'rubenesque.curves.sec.secp256r1'>
+    >>> find("P256")
+    <class 'rubenesque.curves.sec.secp256r1'>
+    >>> find("P-256")
+    <class 'rubenesque.curves.sec.secp256r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -176,7 +189,7 @@ class secp256r1(Point):
     b = 0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b
     order = 0xffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551
     prime = 0xffffffff00000001000000000000000000000000ffffffffffffffffffffffff
-    oid = (1, 2, 840, 10045, 3, 1, 7)
+    aliases = ("1.2.840.10045.3.1.7", "P256", "P-256")
 
     @classmethod
     def generator(cls):
@@ -188,7 +201,14 @@ class secp256r1(Point):
 
 class secp384r1(Point):
     """
-    >>> cls = secp384r1
+    >>> from . import find
+    >>> cls = find("secp384r1")
+    >>> find("1.3.132.0.34")
+    <class 'rubenesque.curves.sec.secp384r1'>
+    >>> find("P384")
+    <class 'rubenesque.curves.sec.secp384r1'>
+    >>> find("P-384")
+    <class 'rubenesque.curves.sec.secp384r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -229,7 +249,7 @@ class secp384r1(Point):
     b =  0xb3312fa7e23ee7e4988e056be3f82d19181d9c6efe8141120314088f5013875ac656398d8a2ed19d2a85c8edd3ec2aef
     order = 0xffffffffffffffffffffffffffffffffffffffffffffffffc7634d81f4372ddf581a0db248b0a77aecec196accc52973
     prime = 0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffeffffffff0000000000000000ffffffff
-    oid = (1, 3, 132, 0, 34)
+    aliases = ("1.3.132.0.34", "P384", "P-384")
 
     @classmethod
     def generator(cls):
@@ -241,7 +261,14 @@ class secp384r1(Point):
 
 class secp521r1(Point):
     """
-    >>> cls = secp521r1
+    >>> from . import find
+    >>> cls = find("secp521r1")
+    >>> find("1.3.132.0.35")
+    <class 'rubenesque.curves.sec.secp521r1'>
+    >>> find("P521")
+    <class 'rubenesque.curves.sec.secp521r1'>
+    >>> find("P-521")
+    <class 'rubenesque.curves.sec.secp521r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -282,7 +309,7 @@ class secp521r1(Point):
     b = 0x00000051953eb9618e1c9a1f929a21a0b68540eea2da725b99b315f3b8b489918ef109e156193951ec7e937b1652c0bd3bb1bf073573df883d2c34f1ef451fd46b503f00
     order = 0x000001fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffa51868783bf2f966b7fcc0148f709a5d03bb5c9b8899c47aebb6fb71e91386409
     prime = 0x000001ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-    oid = (1, 3, 132, 0, 35)
+    aliases = ("1.3.132.0.35", "P521", "P-521")
 
     @classmethod
     def generator(cls):

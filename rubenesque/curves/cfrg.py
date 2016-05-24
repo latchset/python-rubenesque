@@ -30,7 +30,10 @@ from .edwards import Point
 
 class edwards25519(Point):
     """
-    >>> cls = edwards25519
+    >>> from . import find
+    >>> cls = find("edwards25519")
+    >>> find("ed25519")
+    <class 'rubenesque.curves.cfrg.edwards25519'>
 
     Test basic math:
     >>> cls().is_identity
@@ -69,6 +72,7 @@ class edwards25519(Point):
     d = 0x52036cee2b6ffe738cc740797779e89800700a4d4141d8ab75eb4dca135978a3
     order = 0x1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed
     prime = 0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed
+    aliases = ("ed25519", )
     cofactor = 8
 
     @classmethod
@@ -81,7 +85,10 @@ class edwards25519(Point):
 
 class edwards448(Point):
     """
-    >>> cls = edwards448
+    >>> from . import find
+    >>> cls = find("edwards448")
+    >>> find("ed448")
+    <class 'rubenesque.curves.cfrg.edwards448'>
 
     Test basic math:
     >>> cls().is_identity
@@ -121,6 +128,7 @@ class edwards448(Point):
     d = 0xd78b4bdc7f0daf19f24f38c29373a2ccad46157242a50f37809b1da3412a12e79ccc9c81264cfe9ad080997058fb61c4243cc32dbaa156b9
     order = 0x3fffffffffffffffffffffffffffffffffffffffffffffffffffffff7cca23e9c44edb49aed63690216cc2728dc58f552378c292ab5844f3
     prime = 0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffeffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    aliases = ("ed448", )
     cofactor = 4
 
     @classmethod

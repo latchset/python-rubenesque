@@ -29,7 +29,10 @@ from .weierstrass import Point
 
 class brainpoolP160r1(Point):
     """
-    >>> cls = brainpoolP160r1
+    >>> from . import find
+    >>> cls = find("brainpoolP160r1")
+    >>> find("1.3.36.3.3.2.8.1.1.1")
+    <class 'rubenesque.curves.brainpool.brainpoolP160r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -70,7 +73,7 @@ class brainpoolP160r1(Point):
     b = 0x1E589A8595423412134FAA2DBDEC95C8D8675E58
     order = 0xE95E4A5F737059DC60DF5991D45029409E60FC09
     prime = 0xE95E4A5F737059DC60DFC7AD95B3D8139515620F
-    oid = (1, 3, 36, 3, 3, 2, 8, 1, 1, 1)
+    aliases = ("1.3.36.3.3.2.8.1.1.1", )
 
     @classmethod
     def generator(cls):
@@ -82,7 +85,10 @@ class brainpoolP160r1(Point):
 
 class brainpoolP192r1(Point):
     """
-    >>> cls = brainpoolP192r1
+    >>> from . import find
+    >>> cls = find("brainpoolP192r1")
+    >>> find("1.3.36.3.3.2.8.1.1.3")
+    <class 'rubenesque.curves.brainpool.brainpoolP192r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -123,7 +129,7 @@ class brainpoolP192r1(Point):
     b = 0x469A28EF7C28CCA3DC721D044F4496BCCA7EF4146FBF25C9
     order = 0xC302F41D932A36CDA7A3462F9E9E916B5BE8F1029AC4ACC1
     prime = 0xC302F41D932A36CDA7A3463093D18DB78FCE476DE1A86297
-    oid = (1, 3, 36, 3, 3, 2, 8, 1, 1, 3)
+    aliases = ("1.3.36.3.3.2.8.1.1.3", )
 
     @classmethod
     def generator(cls):
@@ -135,7 +141,10 @@ class brainpoolP192r1(Point):
 
 class brainpoolP224r1(Point):
     """
-    >>> cls = brainpoolP224r1
+    >>> from . import find
+    >>> cls = find("brainpoolP224r1")
+    >>> find("1.3.36.3.3.2.8.1.1.5")
+    <class 'rubenesque.curves.brainpool.brainpoolP224r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -176,7 +185,7 @@ class brainpoolP224r1(Point):
     b = 0x2580F63CCFE44138870713B1A92369E33E2135D266DBB372386C400B
     order = 0xD7C134AA264366862A18302575D0FB98D116BC4B6DDEBCA3A5A7939F
     prime = 0xD7C134AA264366862A18302575D1D787B09F075797DA89F57EC8C0FF
-    oid = (1, 3, 36, 3, 3, 2, 8, 1, 1, 5)
+    aliases = ("1.3.36.3.3.2.8.1.1.5", )
 
     @classmethod
     def generator(cls):
@@ -188,7 +197,10 @@ class brainpoolP224r1(Point):
 
 class brainpoolP256r1(Point):
     """
-    >>> cls = brainpoolP256r1
+    >>> from . import find
+    >>> cls = find("brainpoolP256r1")
+    >>> find("1.3.36.3.3.2.8.1.1.7")
+    <class 'rubenesque.curves.brainpool.brainpoolP256r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -229,7 +241,7 @@ class brainpoolP256r1(Point):
     b = 0x26DC5C6CE94A4B44F330B5D9BBD77CBF958416295CF7E1CE6BCCDC18FF8C07B6
     order = 0xA9FB57DBA1EEA9BC3E660A909D838D718C397AA3B561A6F7901E0E82974856A7
     prime = 0xA9FB57DBA1EEA9BC3E660A909D838D726E3BF623D52620282013481D1F6E5377
-    oid = (1, 3, 36, 3, 3, 2, 8, 1, 1, 7)
+    aliases = ("1.3.36.3.3.2.8.1.1.7", )
 
     @classmethod
     def generator(cls):
@@ -241,7 +253,10 @@ class brainpoolP256r1(Point):
 
 class brainpoolP320r1(Point):
     """
-    >>> cls = brainpoolP320r1
+    >>> from . import find
+    >>> cls = find("brainpoolP320r1")
+    >>> find("1.3.36.3.3.2.8.1.1.9")
+    <class 'rubenesque.curves.brainpool.brainpoolP320r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -282,7 +297,7 @@ class brainpoolP320r1(Point):
     b = 0x520883949DFDBC42D3AD198640688A6FE13F41349554B49ACC31DCCD884539816F5EB4AC8FB1F1A6
     order = 0xD35E472036BC4FB7E13C785ED201E065F98FCFA5B68F12A32D482EC7EE8658E98691555B44C59311
     prime = 0xD35E472036BC4FB7E13C785ED201E065F98FCFA6F6F40DEF4F92B9EC7893EC28FCD412B1F1B32E27
-    oid = (1, 3, 36, 3, 3, 2, 8, 1, 1, 9)
+    aliases = ("1.3.36.3.3.2.8.1.1.9", )
 
     @classmethod
     def generator(cls):
@@ -294,7 +309,10 @@ class brainpoolP320r1(Point):
 
 class brainpoolP384r1(Point):
     """
-    >>> cls = brainpoolP384r1
+    >>> from . import find
+    >>> cls = find("brainpoolP384r1")
+    >>> find("1.3.36.3.3.2.8.1.1.11")
+    <class 'rubenesque.curves.brainpool.brainpoolP384r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -335,7 +353,7 @@ class brainpoolP384r1(Point):
     b = 0x04A8C7DD22CE28268B39B55416F0447C2FB77DE107DCD2A62E880EA53EEB62D57CB4390295DBC9943AB78696FA504C11
     order = 0x8CB91E82A3386D280F5D6F7E50E641DF152F7109ED5456B31F166E6CAC0425A7CF3AB6AF6B7FC3103B883202E9046565
     prime = 0x8CB91E82A3386D280F5D6F7E50E641DF152F7109ED5456B412B1DA197FB71123ACD3A729901D1A71874700133107EC53
-    oid = (1, 3, 36, 3, 3, 2, 8, 1, 1, 11)
+    aliases = ("1.3.36.3.3.2.8.1.1.11", )
 
     @classmethod
     def generator(cls):
@@ -347,7 +365,10 @@ class brainpoolP384r1(Point):
 
 class brainpoolP512r1(Point):
     """
-    >>> cls = brainpoolP512r1
+    >>> from . import find
+    >>> cls = find("brainpoolP512r1")
+    >>> find("1.3.36.3.3.2.8.1.1.13")
+    <class 'rubenesque.curves.brainpool.brainpoolP512r1'>
 
     Test basic math:
     >>> cls().is_identity
@@ -388,7 +409,7 @@ class brainpoolP512r1(Point):
     b = 0x3DF91610A83441CAEA9863BC2DED5D5AA8253AA10A2EF1C98B9AC8B57F1117A72BF2C7B9E7C1AC4D77FC94CADC083E67984050B75EBAE5DD2809BD638016F723
     order = 0xAADD9DB8DBE9C48B3FD4E6AE33C9FC07CB308DB3B3C9D20ED6639CCA70330870553E5C414CA92619418661197FAC10471DB1D381085DDADDB58796829CA90069
     prime = 0xAADD9DB8DBE9C48B3FD4E6AE33C9FC07CB308DB3B3C9D20ED6639CCA703308717D4D9B009BC66842AECDA12AE6A380E62881FF2F2D82C68528AA6056583A48F3
-    oid = (1, 3, 36, 3, 3, 2, 8, 1, 1, 13)
+    aliases = ("1.3.36.3.3.2.8.1.1.13", )
 
     @classmethod
     def generator(cls):

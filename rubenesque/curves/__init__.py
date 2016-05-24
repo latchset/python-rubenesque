@@ -30,45 +30,46 @@ from . import cfrg
 from . import sec
 
 
-def by_name(name, cls=None):
-    """Returns a point class for the given curve name
+def find(id, cls=None):
+    """Returns a point class for the given curve identifier
 
-    >>> by_name('secp192r1')
+    Identifiers can be the class name:
+    >>> find('secp256r1')
+    <class 'rubenesque.curves.sec.secp256r1'>
+    >>> find('edwards25519')
+    <class 'rubenesque.curves.cfrg.edwards25519'>
+
+    Identifiers can be a common alias:
+    >>> find('P-256')
+    <class 'rubenesque.curves.sec.secp256r1'>
+    >>> find('ed25519')
+    <class 'rubenesque.curves.cfrg.edwards25519'>
+
+    Identifiers can be OIDs:
+    >>> find("1.2.840.10045.3.1.1")
     <class 'rubenesque.curves.sec.secp192r1'>
-    >>> by_name('snoopyCurve')
+
+    >>> find('snoopyCurve')
+    Traceback (most recent call last):
+        ...
+    NameError: Unknown curve 'snoopyCurve'
     """
 
+    def _inner(name, cls=base.Point):
+        if cls.__name__ == name:
+            return cls
+
+        if name in cls.aliases:
+            return cls
+
+        for c in cls.__subclasses__():
+            cc = _inner(name, c)
+            if cc is not None:
+                return cc
+
+        return None
+
+    cls =  _inner(id)
     if cls is None:
-        cls = base.Point
-
-    if cls.__name__ == name:
-        return cls
-
-    for c in cls.__subclasses__():
-        cc = by_name(name, c)
-        if cc is not None:
-            return cc
-
-    return None
-
-
-def by_oid(oid, cls=None):
-    """Returns a point class for the given curve OID
-
-    >>> by_oid((1, 2, 840, 10045, 3, 1, 1))
-    <class 'rubenesque.curves.sec.secp192r1'>
-    >>> by_oid((1, 2, 3, 4, 5))
-    """
-
-    if cls is None:
-        cls = base.Point
-
-    if cls.oid == oid:
-        return cls
-
-    for c in cls.__subclasses__():
-        cc = by_oid(oid, c)
-        if cc is not None:
-            return cc
-
-    return None
+        raise NameError("Unknown curve '%s'" % id)
+    return cls

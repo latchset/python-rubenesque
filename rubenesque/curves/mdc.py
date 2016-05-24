@@ -29,7 +29,8 @@ from .edwards import Point
 
 class MDC201601(Point):
     """
-    >>> cls = MDC201601
+    >>> from . import find
+    >>> cls = find("MDC201601")
 
     Test basic math:
     >>> cls().is_identity

@@ -66,7 +66,7 @@ Here is a simple example of doing ECDH with SEC P256 using SEC1 encoding.
 Both sides prepare for the exchange by loading the same curve and encoding:
 >>> from rubenesque.codecs.sec import encode, decode
 >>> import rubenesque.curves
->>> secp256r1 = rubenesque.curves.by_name('secp256r1')
+>>> secp256r1 = rubenesque.curves.find('secp256r1')
 
 Alice generates her private and public keys:
 >>> alice_prv = secp256r1.private_key()
