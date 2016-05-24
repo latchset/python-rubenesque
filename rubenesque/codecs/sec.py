@@ -113,13 +113,13 @@ def decode(cls, bytes):
     assert bytes.startswith((b'\x02', b'\x03', b'\x04'))
 
     l = (cls.bits() + 7) // 8
+    z = bytes[0] if isinstance(bytes[0], int) else ord(bytes[0])
     p = ldec(bytes[1:l + 1])
-    if bytes[0] == 4:
+    if z == 4:
         s = ldec(bytes[l + 1:2 * l + 1])
         point = cls.create(p, s)
     else:
-        s = bytes[0] if isinstance(bytes[0], int) else ord(bytes[0])
-        point = cls.recover(p, s & 1)
+        point = cls.recover(p, z & 1)
 
     assert point.is_valid
     return point
