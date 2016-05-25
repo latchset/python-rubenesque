@@ -73,3 +73,20 @@ def find(id, cls=None):
     if cls is None:
         raise NameError("Unknown curve '%s'" % id)
     return cls
+
+def supported():
+    """Returns a list of the names of supported curves.
+
+    >>> tuple(sorted(supported()))
+    ('MDC201601', 'brainpoolP160r1', 'brainpoolP192r1', 'brainpoolP224r1', 'brainpoolP256r1', 'brainpoolP320r1', 'brainpoolP384r1', 'brainpoolP512r1', 'edwards25519', 'edwards448', 'secp192r1', 'secp224r1', 'secp256r1', 'secp384r1', 'secp521r1')
+    """
+
+    def _inner(cls=base.Point):
+        if not cls.__subclasses__():
+            yield cls.__name__
+        else:
+            for c in cls.__subclasses__():
+                for n in _inner(c):
+                    yield n
+
+    return _inner()
