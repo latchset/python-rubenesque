@@ -30,7 +30,7 @@ from . import cfrg
 from . import sec
 
 
-def find(id, cls=None):
+def find(id):
     """Returns a point class for the given curve identifier
 
     Identifiers can be the class name:
