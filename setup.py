@@ -28,6 +28,7 @@ def read(fname):
     with open(fname) as f:
         return f.read()
 
+
 setup(
     name="rubenesque",
     version="1",
@@ -50,6 +51,7 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
+        "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
         "Topic :: Security :: Cryptography"
     ],
