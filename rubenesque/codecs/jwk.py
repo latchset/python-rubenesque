@@ -28,6 +28,12 @@ from ..lcodec import lenc, ldec
 from ..curves import find
 import base64
 
+def b64u_enc(x):
+    return base64.b64encode(x, b"-_").decode("UTF-8").rstrip("=")
+
+def b64u_dec(x):
+    x += "=" * (4 - len(x) % 4)
+    return base64.b64decode(x.encode("UTF-8"), b"-_")
 
 def encode(point, prv=None):
     """Encodes a point to a dictionary representing a JSON Web Token.
@@ -61,13 +67,13 @@ def encode(point, prv=None):
     jwk = {
         "kty": "EC",
         "crv": NAMES.get(point.__class__.__name__, point.__class__.__name__),
-        "x": base64.b64encode(x, b"-_").decode('UTF-8').rstrip("="),
-        "y": base64.b64encode(y, b"-_").decode('UTF-8').rstrip("="),
+        "x": b64u_enc(x),
+        "y": b64u_enc(y),
     }
 
     if prv is not None:
         d = lenc(prv, (point.bits() + 7) // 8)
-        jwk["d"] = base64.b64encode(d, b"-_").decode('UTF-8').rstrip("=")
+        jwk["d"] = b64u_enc(d)
 
     return jwk
 
@@ -94,13 +100,11 @@ def decode(jwk):
     assert jwk["kty"] == "EC"
 
     crv = find(jwk["crv"])
-    x = jwk["x"] + "=" * (4 - len(jwk["x"]) % 4)
-    y = jwk["y"] + "=" * (4 - len(jwk["y"]) % 4)
+    x = ldec(b64u_dec(jwk["x"]))
+    y = ldec(b64u_dec(jwk["y"]))
     d = jwk.get("d", None)
 
     if d is not None:
-        d += "=" * (4 - len(d) % 4)
-        d = ldec(base64.b64decode(d, "-_"))
+        d = ldec(b64u_dec(d))
 
-    p = crv(ldec(base64.b64decode(x, "-_")), ldec(base64.b64decode(y, "-_")))
-    return (p, d)
+    return (crv(x, y), d)
