@@ -44,7 +44,7 @@ setup(
         'rubenesque.curves',
         'rubenesque.signatures',
     ],
-    long_description=read('README'),
+    long_description=read('README.md'),
     requires=[],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
