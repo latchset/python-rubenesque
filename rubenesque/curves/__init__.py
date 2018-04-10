@@ -28,6 +28,7 @@ from . import base
 from . import brainpool
 from . import cfrg
 from . import sec
+from . import mdc
 
 
 def find(id):
