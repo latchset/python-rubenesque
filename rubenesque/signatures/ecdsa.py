@@ -26,6 +26,7 @@
 
 from ..math import inv
 from ..lcodec import ldec
+from ..curves import weierstrass
 
 
 def sign(cls, prv, hsh, testk=None):
@@ -65,6 +66,7 @@ def sign(cls, prv, hsh, testk=None):
     >>> b == 5028224013397087880963813951950174050813517229556618035427576214486083823861825258909909585187151444995522339222016536225541889721370155815222553876665673312
     True
     """
+    assert issubclass(cls, weierstrass.Point)
     assert prv >= 1 and prv < cls.order
 
     z = ldec(hsh) & (2 ** cls.bits() - 1)
@@ -125,6 +127,8 @@ def verify(pub, hsh, r, s):
     >>> verify(secp521r1.generator() * w, h, 0, s)
     False
     """
+    if not isinstance(pub, weierstrass.Point):
+        return False
 
     if not pub.is_valid:
         return False
